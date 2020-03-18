@@ -1,0 +1,31 @@
+// controllers/users.js
+const express = require('express')
+const router = express.Router()
+const User = require('../models/User')
+
+// Get all users
+router.get('/', (req, res) => {
+    res.send('Users GET route is working!')
+})
+
+// Get user by Id
+router.get('/:id', (req, res) => {
+
+})
+
+// Create a user
+router.post('/', (req, res) => {
+
+})
+
+// Update a user
+router.put('/:id', (req, res) => {
+
+})
+
+// Delete a user
+router.delete('/:id', (req, res) => {
+
+})
+
+module.exports = router
