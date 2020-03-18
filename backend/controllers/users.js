@@ -11,7 +11,8 @@ router.get('/', (req, res) => {
 
 // Get user by Id
 router.get('/:id', (req, res) => {
-
+    User.findById(req.params.id)
+        .then(user => res.json(user))
 })
 
 // Create a user
