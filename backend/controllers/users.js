@@ -23,7 +23,11 @@ router.post('/', (req, res) => {
 
 // Update a user
 router.put('/:id', (req, res) => {
-
+    User.findByIdAndUpdate(
+        req.params.id, 
+        req.body, 
+        {new: true})
+        .then(updatedUser => res.json(updatedUser))
 })
 
 // Delete a user
