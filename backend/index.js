@@ -1,8 +1,10 @@
 const express = require('express');
 const app = express();
 const usersController = require('./controllers/users');
+const cors = require('cors')
 
 // Middleware
+app.use(cors())
 app.use(express.json());
 
 // Controllers
