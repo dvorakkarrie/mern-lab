@@ -46,4 +46,16 @@ router.post('/:userId/new-todo/', (req, res) => {
     })
 })
 
+router.put("/:userId/update-todo/:todoId", (req, res) => {
+    User.findById(req.params.userId).then(user => {
+
+        let todoIndex = user.todos.findIndex(todo => todo._id == req.params.todoId);
+
+        user.todos[todoIndex].done = !user.todos[todoIndex].done
+        user.save()
+
+        res.json(user)
+    })
+})
+
 module.exports = router
