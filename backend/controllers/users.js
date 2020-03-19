@@ -59,4 +59,16 @@ router.put("/:userId/update-todo/:todoId", (req, res) => {
     })
 })
 
+router.delete("/:userId/delete-todo/:todoId", (req, res) => {
+    User.findById(req.params.userId).then(user => {
+  
+      let todoIndex = user.todos.findIndex(todo => todo._id == req.params.todoId);
+  
+      user.todos.splice(todoIndex, 1)
+      user.save()
+  
+      res.json(user);
+    })
+  })
+
 module.exports = router

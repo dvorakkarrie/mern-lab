@@ -55,16 +55,16 @@ class App extends Component {
 
   deleteAxiosUser = event => {
     event.preventDefault()
-
+    
     axios({
-      method: 'DELETE',
+      method: "DELETE",
       url: `${backendUrl}${event.target.id}`
     })
     .then(deletedUser => {
-      this.getUsersAxios()
-    })
+      this.getUsersAxios();
+    });
   }
-
+  
   handleSubmit = event => {
     event.preventDefault()
     this.createUserAxios()

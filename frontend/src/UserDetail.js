@@ -1,69 +1,45 @@
-import React from 'react'
-
+import React from 'react';
+import Todo from './Todo';
+  
 const UserDetail = props => {
-    
-    let userDetail = props.users.find(
-        user => user._id === props.match.params.id)
 
-    console.log(userDetail.todos)
+let userDetail = props.users.find(user => user._id === props.match.params.id)
+let uncompletedTodos = []
+let completedTodos = []
+  
+userDetail.todos.forEach(todo => {
+  let todoComponent = (
+    <Todo todo={todo} userId={userDetail._id} toggleDone={props.toggleDone} />
+  );
 
-    return(
-        <div>
-            <form
-                onSubmit={props.handleNewTodoSubmit}
-                onChange={props.handleChange}
-                id={userDetail._id}
-      >
-                <input
-                    type="text"
-                    name="newTodoDescription"
-                    placeholder="New Todo! Get er done!"
-                    value={props.newTodoDescription}
-            />
-                <input type="submit" />
-            </form>
+  todo.done 
+  ? completedTodos.push(todoComponent) 
+  : uncompletedTodos.push(todoComponent)
+});
 
-            <h2>TODOS</h2>
-            <ul>
-                {userDetail.todos.map(todo => {
-                    if(!todo.done) {
-                        return (
-                            <li>
-                              {todo.description}{" "}
-                              <button
-                                id={userDetail._id}
-                                data-todo-id={todo._id}
-                                onClick={props.toggleDone}
-                              >
-                                done
-                              </button>
-                            </li>
-                          );
-                    }
-                })}
-            </ul>
+return (
+  <div>
+    <form
+      onSubmit={props.handleNewTodoSubmit}
+      onChange={props.handleChange}
+      id={userDetail._id}
+    >
+      <input
+        type="text"
+        name="newTodoDescription"
+        placeholder="New Todo! Get er done!"
+        value={props.newTodoDescription}
+      />
+      <input type="submit" />
+    </form>
 
-            <h2>COMPLETED TODOS</h2>
-            <ul>
-                {userDetail.todos.map(todo => {
-                    if (todo.done) {
-                        return (
-                            <li>
-                              {todo.description}{" "}
-                              <button
-                                id={userDetail._id}
-                                data-todo-id={todo._id}
-                                onClick={props.toggleDone}
-                              >
-                                not done
-                              </button>
-                            </li>
-                          );
-                    }
-                })}
-            </ul>
-        </div>
-    )
+    <h2>{userDetail.name} TODOS</h2>
+    <ul>{uncompletedTodos}</ul>
+
+    <h2>COMPLETED TODOS</h2>
+    <ul>{completedTodos}</ul>
+  </div>
+);
 }
 
 export default UserDetail
