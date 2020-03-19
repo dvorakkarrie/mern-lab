@@ -9,10 +9,6 @@ const UserDetail = props => {
 
     return(
         <div>
-            {/* <h1>User Details!</h1>
-            <h2>{userDetail.name}</h2>
-            <em>{userDetail.email}</em> */}
-
             <form
                 onSubmit={props.handleNewTodoSubmit}
                 onChange={props.handleChange}
@@ -31,7 +27,18 @@ const UserDetail = props => {
             <ul>
                 {userDetail.todos.map(todo => {
                     if(!todo.done) {
-                        return <li> {todo.description}</li>
+                        return (
+                            <li>
+                              {todo.description}{" "}
+                              <button
+                                id={userDetail._id}
+                                data-todo-id={todo._id}
+                                onClick={props.toggleDone}
+                              >
+                                done
+                              </button>
+                            </li>
+                          );
                     }
                 })}
             </ul>
@@ -40,7 +47,18 @@ const UserDetail = props => {
             <ul>
                 {userDetail.todos.map(todo => {
                     if (todo.done) {
-                        return <li>{todo.description}</li>
+                        return (
+                            <li>
+                              {todo.description}{" "}
+                              <button
+                                id={userDetail._id}
+                                data-todo-id={todo._id}
+                                onClick={props.toggleDone}
+                              >
+                                not done
+                              </button>
+                            </li>
+                          );
                     }
                 })}
             </ul>

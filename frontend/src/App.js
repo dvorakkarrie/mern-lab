@@ -95,6 +95,18 @@ class App extends Component {
     })
   }
 
+  toggleDone = event => {
+    event.preventDefault();
+    let todoId = event.target.getAttribute('data-todo-id');
+    axios({
+      method: "PUT",
+      url: `${backendUrl}${event.target.id}/update-todo/${todoId}`,
+    }).then(user => {
+      this.getUsersAxios();
+      this.props.history.push(`/users/${user.data._id}`);
+    });
+  };
+
   render() {
     console.log(this.state)
     return (
@@ -118,6 +130,7 @@ class App extends Component {
             newTodoDescription={this.state.newTodoDescription}
             handleChange={this.handleChange}
             handleNewTodoSubmit={this.handleNewTodoSubmit}
+            toggleDone={this.toggleDone}
           /> } 
         />
         <Route 
