@@ -36,4 +36,14 @@ router.delete('/:id', (req, res) => {
         .then(deletedUsers => res.json(deletedUsers))
 })
 
+router.post('/:userId/new-todo/', (req, res) => {
+    User.findById(req.params.userId).then(user => {
+        let newTodo = req.body;
+        newTodo.done = false
+        user.todos.push(newTodo);
+        user.save();
+        res.json(user);
+    })
+})
+
 module.exports = router
