@@ -37,6 +37,7 @@ router.delete('/:id', (req, res) => {
 })
 
 router.post('/:userId/new-todo/', (req, res) => {
+    console.log(req.params)
     User.findById(req.params.userId).then(user => {
         let newTodo = req.body;
         newTodo.done = false

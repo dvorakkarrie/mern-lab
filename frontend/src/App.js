@@ -18,7 +18,8 @@ class App extends Component {
     this.state = {
       users: [],
       newUserName: '',
-      newUserEmail: ''
+      newUserEmail: '',
+      newTodoDescription: ""
     }
   }
 
@@ -70,17 +71,32 @@ class App extends Component {
   }
 
   handleChange = event => {
+    console.log(event.target.value)
     this.setState({
       [event.target.name]: event.target.value
     })
   }
 
-  // handleDelete = event => {
-  //   event.preventDefault()
-  //   this.deleteUser(event)
-  // }
+  handleNewTodoSubmit = event => {
+    console.log(event.target.id)
+    event.preventDefault()
+    axios({
+      method: 'POST',
+      url: `${backendUrl}${event.target.id}/new-todo/`,
+      data: {
+        description: this.state.newTodoDescription
+      }
+    })
+    .then(newUser => {
+      console.log(newUser)
+      this.setState({newTodoDescription: ''})
+      this.getUsersAxios()
+      this.props.history.push(`/users/${newUser.data._id}`)
+    })
+  }
 
   render() {
+    console.log(this.state)
     return (
       <div className="App">
         <nav >
@@ -99,6 +115,9 @@ class App extends Component {
           <UserDetail 
             {...routerProps}
             users={this.state.users} 
+            newTodoDescription={this.state.newTodoDescription}
+            handleChange={this.handleChange}
+            handleNewTodoSubmit={this.handleNewTodoSubmit}
           /> } 
         />
         <Route 

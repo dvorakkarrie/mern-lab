@@ -9,9 +9,23 @@ const UserDetail = props => {
 
     return(
         <div>
-            <h1>User Details!</h1>
+            {/* <h1>User Details!</h1>
             <h2>{userDetail.name}</h2>
-            <em>{userDetail.email}</em>
+            <em>{userDetail.email}</em> */}
+
+            <form
+                onSubmit={props.handleNewTodoSubmit}
+                onChange={props.handleChange}
+                id={userDetail._id}
+      >
+                <input
+                    type="text"
+                    name="newTodoDescription"
+                    placeholder="New Todo! Get er done!"
+                    value={props.newTodoDescription}
+            />
+                <input type="submit" />
+            </form>
 
             <h2>TODOS</h2>
             <ul>
